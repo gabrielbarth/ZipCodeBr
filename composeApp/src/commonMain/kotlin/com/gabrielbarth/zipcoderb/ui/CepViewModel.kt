@@ -20,8 +20,8 @@ class CepViewModel(
     private val _isButtonEnabled = MutableStateFlow(false)
     val isButtonEnabled: StateFlow<Boolean> = _isButtonEnabled
 
-    private val _endereco = MutableStateFlow<Endereco?>(null)
-    val endereco: StateFlow<Endereco?> = _endereco
+    private val _address = MutableStateFlow<Endereco?>(null)
+    val address: StateFlow<Endereco?> = _address
 
     private val _error = MutableStateFlow<String?>(null)
     val error: StateFlow<String?> = _error
@@ -48,13 +48,13 @@ class CepViewModel(
     fun fetchCep() {
         if (_isButtonEnabled.value) {
             _isLoading.value = true
-            _endereco.value = null
+            _address.value = null
             viewModelScope.launch {
                 try {
                     val result = cepRepository.buscarCep(_cep.value)
 
                     if (result?.cep?.isNotBlank() == true) {
-                        _endereco.value = result
+                        _address.value = result
                     } else {
                         setError("CEP não encontrado")
                     }

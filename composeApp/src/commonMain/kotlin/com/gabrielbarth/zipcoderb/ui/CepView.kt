@@ -22,7 +22,7 @@ fun CepView() {
     }
     val cep by cepViewModel.cep.collectAsState()
     val isButtonEnabled by cepViewModel.isButtonEnabled.collectAsState()
-    val endereco by cepViewModel.endereco.collectAsState()
+    val address by cepViewModel.address.collectAsState()
     val error by cepViewModel.error.collectAsState()
     val isLoading by cepViewModel.isLoading.collectAsState()
     val scaffoldState = rememberScaffoldState()
@@ -54,9 +54,7 @@ fun CepView() {
                     singleLine = true,
                     modifier = Modifier.fillMaxWidth()
                 )
-
                 Spacer(modifier = Modifier.height(16.dp))
-
                 Button(
                     onClick = { cepViewModel.fetchCep() },
                     enabled = isButtonEnabled && !isLoading,
@@ -72,11 +70,8 @@ fun CepView() {
                         Text(text = "Consultar CEP")
                     }
                 }
-
                 Spacer(modifier = Modifier.height(16.dp))
-
-
-                endereco?.let {
+                address?.let {
                     Card(
                         modifier = Modifier.fillMaxWidth(),
                         elevation = 4.dp
